@@ -16,11 +16,14 @@ const errorHandler = (
 };
 
 const app = express();
+const PORT = 1337;
+
+app.listen(PORT, () => {
+  console.log("Server up and running", PORT);
+});
 
 app.use(express.json());
 app.use(cors());
-
-const PORT = 1337;
 
 connectToDataBase();
 
@@ -33,7 +36,3 @@ app.use(errorHandler);
 app.use("/user", userRouter);
 app.use("/category", categoryRoutes);
 app.use("/task", taskRoutes);
-
-app.listen(PORT, () => {
-  console.log("Server up and running", PORT);
-});
