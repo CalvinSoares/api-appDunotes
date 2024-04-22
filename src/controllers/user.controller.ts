@@ -30,7 +30,6 @@ export const createUser = async (req: Request, res: Response) => {
       email: email,
       password: passwordHash,
     });
-    console.log("usuario", user);
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.log("error in createUser", err);

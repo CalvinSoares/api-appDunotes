@@ -3,6 +3,9 @@ import { AuthRequest } from "../middleware";
 import Category from "../models/category-model";
 import Task from "../models/task-model";
 import { ICategory } from "../types";
+import debug from "debug";
+
+const logger = debug("backend:category");
 
 export const getAllCategories = async (
   request: AuthRequest,
@@ -10,9 +13,15 @@ export const getAllCategories = async (
 ) => {
   try {
     const { user } = request;
+
+    logger("Fetching all categories for user:", user);
+
     const categories = await Category.find({
       user: user,
     });
+
+    logger("Fetched categories:", categories);
+
     return response.send(categories);
   } catch (error) {
     response.send({ error: "Something went wrong" });
@@ -20,13 +29,6 @@ export const getAllCategories = async (
     throw error;
   }
 };
-
-/**
- *
- * @param request TODO: Record get category by id
- * @param response
- * @returns
- */
 
 export const getCategoryById = async (
   request: AuthRequest,
