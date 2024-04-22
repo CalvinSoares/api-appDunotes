@@ -26,11 +26,11 @@ export const createUser = async (req: Request, res: Response) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     const user = await User.create({
-      name,
-      email,
+      name: name,
+      email: email,
       password: passwordHash,
     });
-    await user.save();
+    console.log("usuario", user);
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.log("error in createUser", err);
